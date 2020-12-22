@@ -1,0 +1,7 @@
+spring:
+  application.name: test-service
+  cloud:
+    discovery:
+      enabled: false
+
+eureka.client.enabled: false

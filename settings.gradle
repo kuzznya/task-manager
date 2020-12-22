@@ -1,0 +1,7 @@
+rootProject.name = 'task-manager'
+
+include 'common'
+include 'discovery'
+include 'gateway'
+include 'task-manager-api'
+include 'task-manager-impl'
