@@ -1,5 +1,6 @@
 package com.taskmanager.common;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -12,12 +13,13 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Worker {
     String name;
-    Worker master;
-    List<Worker> slaves;
+    String master;
+    List<String> slaves;
 
+    @JsonCreator
     public Worker(@JsonProperty(value = "name", required = true) String name,
-                  @JsonProperty("master") Worker master,
-                  @JsonProperty("slaves") List<Worker> slaves) {
+                  @JsonProperty("master") String master,
+                  @JsonProperty("slaves") List<String> slaves) {
         this.name = name;
         this.master = master;
         this.slaves = slaves;

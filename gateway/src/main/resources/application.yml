@@ -12,6 +12,10 @@ spring:
           enabled: true
 
       routes:
+        - id: authenticator
+          uri: lb://AUTHENTICATOR
+          predicates:
+            - Path=/authenticator/**
         - id: taskManager
           uri: lb://TASK-MANAGER
           predicates:
@@ -19,7 +23,7 @@ spring:
         - id: eurekaService
           uri: ${EUREKA_SERVER:http://localhost:8761}
           predicates:
-            - Path=/services-status/**
+            - Path=/eureka-service/**
           filters:
             - StripPrefix=1
         - id: eureka

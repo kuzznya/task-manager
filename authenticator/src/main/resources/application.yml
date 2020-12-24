@@ -1,0 +1,29 @@
+server:
+  port: 0
+  servlet:
+    context-path: /authenticator
+
+spring:
+  application:
+    name: authenticator
+  datasource:
+    url: jdbc:h2:mem:h2DB;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:password}
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+
+security:
+  secret: somesecret1234
+  admin:
+    username: admin
+    name: Main Admin
+    password: password

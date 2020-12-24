@@ -1,8 +1,8 @@
 package com.taskmanager.manager.api.controller;
 
+import com.taskmanager.common.Task;
 import com.taskmanager.common.Worker;
 import com.taskmanager.manager.api.model.TaskRequest;
-import org.springframework.scheduling.config.Task;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
