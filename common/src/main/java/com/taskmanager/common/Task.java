@@ -18,7 +18,8 @@ public class Task {
     String name;
     String description;
     TaskState state;
-    Worker executor;
+    String author;
+    String executor;
     Instant created;
     Instant edited;
     String comment;
@@ -28,7 +29,8 @@ public class Task {
                 @JsonProperty("name") String name,
                 @JsonProperty("description") String description,
                 @JsonProperty("state") TaskState state,
-                @JsonProperty("executor") Worker executor,
+                @JsonProperty("author") String author,
+                @JsonProperty("executor") String executor,
                 @JsonProperty("creationTime") Instant created,
                 @JsonProperty("lastEditTime") Instant edited,
                 @JsonProperty("comment") String comment) {
@@ -36,6 +38,7 @@ public class Task {
         this.name = name;
         this.description = description;
         this.state = state;
+        this.author = author;
         this.executor = executor;
         this.created = created;
         this.edited = edited;

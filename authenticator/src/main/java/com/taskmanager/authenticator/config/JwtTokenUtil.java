@@ -4,13 +4,17 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -43,6 +47,16 @@ public class JwtTokenUtil {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
+    public List<SimpleGrantedAuthority> getRoles(String token) {
+        return getClaimFromToken(token, claims ->
+                List.of(claims
+                        .get("roles", String.class)
+                        .split(","))
+        ).stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+    }
+
     //check if the token has expired
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
@@ -72,8 +86,15 @@ public class JwtTokenUtil {
     private String doGenerateToken(UserDetails userDetails,
                                    String type,
                                    Duration tokenTTL) {
+        String rolesString = userDetails.getAuthorities()
+                .stream()
+                .filter(authority -> authority instanceof SimpleGrantedAuthority)
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
+
         return Jwts.builder()
                 .claim("type", type)
+                .claim("roles", rolesString)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(

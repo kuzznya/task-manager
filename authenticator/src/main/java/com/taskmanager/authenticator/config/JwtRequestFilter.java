@@ -49,7 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         workerService.findWorkerByUsername(username).ifPresent(user -> {
-            if (!request.getRequestURI().equals("/authentication/refresh") &&
+            if (!request.getRequestURI().equals("/authenticator/authentication/refresh") &&
                     tokenUtil.validateToken(jwt, user.toUser())) {
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         user, jwt, user.toUser().getAuthorities());
@@ -57,8 +57,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(token);
             }
             // validate refresh token if request is POST /authentication with refresh token
-            else if (request.getRequestURI().equals("/authentication/refresh") &&
-                    request.getMethod().equals(HttpMethod.POST) &&
+            else if (request.getRequestURI().equals("/authenticator/authentication/refresh") &&
+                    request.getMethod().equals(HttpMethod.POST.name()) &&
                     tokenUtil.validateRefreshToken(jwt, user.toUser())) {
                 List<GrantedAuthority> authorities = new ArrayList<>(user.toUser().getAuthorities());
                 authorities.add(new SimpleGrantedAuthority("REFRESH"));

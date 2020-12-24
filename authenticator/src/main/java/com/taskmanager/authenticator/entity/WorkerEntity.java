@@ -54,6 +54,6 @@ public class WorkerEntity {
                 .map(WorkerEntity::getUsername)
                 .collect(Collectors.toList());
 
-        return new Worker(username, masterUsername, slavesUsernames);
+        return new Worker(username, name, masterUsername, slavesUsernames);
     }
 }

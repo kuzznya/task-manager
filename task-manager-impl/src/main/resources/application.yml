@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: task-manager
+
+security:
+  secret:
+    somesecret1234

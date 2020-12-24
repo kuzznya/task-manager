@@ -12,14 +12,17 @@ import java.util.List;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Worker {
+    String username;
     String name;
     String master;
     List<String> slaves;
 
     @JsonCreator
-    public Worker(@JsonProperty(value = "name", required = true) String name,
+    public Worker(@JsonProperty(value = "username", required = true) String username,
+                  @JsonProperty(value = "name", required = true) String name,
                   @JsonProperty("master") String master,
                   @JsonProperty("slaves") List<String> slaves) {
+        this.username = username;
         this.name = name;
         this.master = master;
         this.slaves = slaves;
