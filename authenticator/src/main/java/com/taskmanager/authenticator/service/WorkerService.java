@@ -46,7 +46,7 @@ public class WorkerService {
     public List<WorkerEntity> getAllSlaves(WorkerEntity worker) {
         List<WorkerEntity> slaves = new ArrayList<>(worker.getSlaves());
 
-        for (WorkerEntity slave : slaves)
+        for (WorkerEntity slave : worker.getSlaves())
             slaves.addAll(getAllSlaves(slave));
 
         return slaves;

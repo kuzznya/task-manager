@@ -2,9 +2,7 @@ package com.taskmanager.authenticator.entity;
 
 import com.taskmanager.common.Worker;
 import com.taskmanager.common.WorkerRole;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -16,6 +14,8 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"master", "slaves"})
+@ToString(exclude = {"master", "slaves"})
 public class WorkerEntity {
 
     @Id
