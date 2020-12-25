@@ -20,6 +20,10 @@ spring:
           uri: lb://TASK-MANAGER
           predicates:
             - Path=/tasks/**
+        - id: reporter
+          uri: lb://REPORTER
+          predicates:
+            - Path=/reporter/**
         - id: eurekaService
           uri: ${EUREKA_SERVER:http://localhost:8761}
           predicates:

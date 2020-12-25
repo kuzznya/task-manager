@@ -1,0 +1,11 @@
+server:
+  port: 0
+  servlet.context-path: /reporter
+
+spring:
+  application:
+    name: reporter
+
+security:
+  secret:
+    somesecret1234
