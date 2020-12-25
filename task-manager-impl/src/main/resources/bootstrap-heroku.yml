@@ -1,0 +1,6 @@
+eureka:
+  instance:
+    hostname: ${DOMAIN_NAME}
+    secure-port: 443
+    non-secure-port-enabled: false
+    secure-port-enabled: true
