@@ -23,7 +23,7 @@ public class SprintReport extends Report {
                         @JsonProperty("author") String author,
                         @JsonProperty("content") String content,
                         @JsonProperty("sprint") UUID sprint,
-                        @JsonProperty("sprintReports") List<SprintReport> slavesReports) {
+                        @JsonProperty("slavesReports") List<SprintReport> slavesReports) {
         super(id, author,
                 slavesReports.stream()
                         .flatMap(report -> report.getTasks().stream())

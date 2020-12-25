@@ -69,7 +69,7 @@ public class ReportService {
     private List<SprintReportEntity> getSlavesSprintReports(User author, UUID sprintId) {
         List<Worker> slaves = authenticatorClient.getAllSlaves(author.getPassword(), author.getUsername());
         return slaves.stream()
-                .map(slave -> reportRepository.findByAuthorAndAndSprint_Id(slave.getUsername(), sprintId))
+                .flatMap(slave -> reportRepository.findByAuthorAndSprint_Id(slave.getUsername(), sprintId).stream())
                 .filter(reportEntity -> reportEntity instanceof SprintReportEntity)
                 .map(reportEntity -> (SprintReportEntity) reportEntity)
                 .collect(Collectors.toList());

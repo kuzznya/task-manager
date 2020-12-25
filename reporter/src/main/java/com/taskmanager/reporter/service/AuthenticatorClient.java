@@ -1,5 +1,6 @@
 package com.taskmanager.reporter.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.taskmanager.common.Worker;
@@ -60,10 +61,11 @@ public class AuthenticatorClient {
         if (result == null)
             throw new RuntimeException("Result is null");
 
+        ObjectMapper mapper = new ObjectMapper();
+
         return result
                 .stream()
-                .filter(obj -> obj instanceof Worker)
-                .map(obj -> (Worker) obj)
+                .map(obj -> mapper.convertValue(obj, Worker.class))
                 .collect(Collectors.toList());
     }
 }
